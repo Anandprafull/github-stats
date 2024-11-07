@@ -18,19 +18,15 @@ jobs:
     # Check out repository under $GITHUB_WORKSPACE, so the job can access it
     - uses: actions/checkout@v3
 
-    # Run using Python 3.8 for consistency and aiohttp
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v4
+    # Run using Node.js 20
+    - name: Setup Node.js 20
+      uses: actions/setup-node@v3
       with:
-        python-version: '3.8'
-        architecture: 'x64'
-        cache: 'pip'
+        node-version: '20'
 
-    # Install dependencies with `pip`
-    - name: Install requirements
-      run: |
-        python3 -m pip install --upgrade pip setuptools wheel
-        python3 -m pip install -r requirements.txt
+    # Install dependencies with `npm install` if using Node.js
+    - name: Install dependencies
+      run: npm install
 
     # Generate all statistics images
     - name: Generate images
